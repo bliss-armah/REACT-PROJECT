@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const List = () => {
+const List = ({users}) => {
+
   return (
     <>
-      <h2>list component</h2>
+      {
+        users.map((user) => {
+          const { id, name, age, image } = user
+          return (
+            <article key={id} className="person">
+            <img src={image} alt={name} />
+            <div>
+              <h4>{name}</h4>
+              <p>{age} years</p>
+            </div>
+            </article>
+          )
+          
+        })
+      }
     </>
   );
 };

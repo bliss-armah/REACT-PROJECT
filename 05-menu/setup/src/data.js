@@ -25,7 +25,6 @@ const menu = [
   },
   {
     id: 4,
-    title: 'country delight',
     category: 'breakfast',
     price: 20.99,
     img: './images/item-4.jpeg',
@@ -68,6 +67,14 @@ const menu = [
     title: 'quarantine buddy',
     category: 'shakes',
     price: 16.99,
+    img: './images/item-9.jpeg',
+    desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+  },
+  {
+    id: 10,
+    title: 'quarantine buddy',
+    category: 'supper',
+    price: 58.99,
     img: './images/item-9.jpeg',
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
