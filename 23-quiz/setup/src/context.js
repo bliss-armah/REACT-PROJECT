@@ -30,18 +30,49 @@ const fetchQuestion =  async(url) =>{
   const response = await axios(url).catch(err => console.log(err))
   if(response){
     const data = response.data.results
-    console.log(data);
+    if(data.length > 0){
+      setQuestions(data)
+      setWaiting(false)
+      setLoading(false)
+      setError(false)
+    }
+    else{
+      setWaiting(true)
+      setError(true)
+    }
+    
   }
   else{
     setWaiting(true)
   }
 }
 
+const nextQuestion =()  => {
+  setIndex((oldIndex)=>{
+    const index = oldIndex + 1
+    if (index > questions.length -1) {
+      //openModal()
+      return 0
+    }
+    else{
+
+      return index
+    }
+  })
+}
+
+const checkAnswer = value =>{
+
+  if (value) {
+    setCorrect((oldstate)=> oldstate + 1)
+  }
+  nextQuestion()
+}
 useEffect(()=>{
   fetchQuestion(tempUrl)
 },[])
 
-  return <AppContext.Provider value={{waiting,loading,questions,index,correct,error,isModalOpen}}>{children}</AppContext.Provider>
+  return <AppContext.Provider value={{waiting,loading,questions,index,correct,error,isModalOpen,nextQuestion,checkAnswer}}>{children}</AppContext.Provider>
 }
 // make sure use
 export const useGlobalContext = () => {
