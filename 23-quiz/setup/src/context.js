@@ -51,7 +51,7 @@ const nextQuestion =()  => {
   setIndex((oldIndex)=>{
     const index = oldIndex + 1
     if (index > questions.length -1) {
-      //openModal()
+      openModal()
       return 0
     }
     else{
@@ -68,11 +68,23 @@ const checkAnswer = value =>{
   }
   nextQuestion()
 }
+
+
+const openModal = () =>{
+
+  setIsModalOpen(true)
+}
+const closeModal = () =>{
+  setWaiting(true)
+  setCorrect(0)
+setIsModalOpen(false)
+}
+
 useEffect(()=>{
   fetchQuestion(tempUrl)
 },[])
 
-  return <AppContext.Provider value={{waiting,loading,questions,index,correct,error,isModalOpen,nextQuestion,checkAnswer}}>{children}</AppContext.Provider>
+  return <AppContext.Provider value={{waiting,loading,questions,index,correct,error,isModalOpen,nextQuestion,checkAnswer,closeModal}}>{children}</AppContext.Provider>
 }
 // make sure use
 export const useGlobalContext = () => {
