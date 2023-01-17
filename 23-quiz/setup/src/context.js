@@ -21,6 +21,11 @@ const AppProvider = ({ children }) => {
   const [index,setIndex] = useState(0);
   const [correct,setCorrect] = useState(0);
   const [error,setError] = useState(false);
+  const  [quiz,setQuiz] = useState({
+    amount:10,
+    category:'sports',
+    difficulty:'easy'
+  })
 
   const [isModalOpen,setIsModalOpen] = useState(false)
 
@@ -80,11 +85,24 @@ const closeModal = () =>{
 setIsModalOpen(false)
 }
 
-useEffect(()=>{
-  fetchQuestion(tempUrl)
-},[])
+const handleChange = (e) =>{
+  const name = e.target.name
+  const value = e.target.value
+  setQuiz({...quiz,[name]:value})
+}
 
-  return <AppContext.Provider value={{waiting,loading,questions,index,correct,error,isModalOpen,nextQuestion,checkAnswer,closeModal}}>{children}</AppContext.Provider>
+const handleSubmit = (e) =>{
+e.preventDefault()
+const {amount,category,difficulty} = quiz
+
+
+const url = `${API_ENDPOINT}amount=${amount}&difficulty=${difficulty}&category=${table[category]}&type=multiple`
+fetchQuestion(url)
+}
+
+
+
+  return <AppContext.Provider value={{waiting,loading,questions,index,correct,error,isModalOpen,nextQuestion,checkAnswer,closeModal,quiz,handleChange,handleSubmit,}}>{children}</AppContext.Provider>
 }
 // make sure use
 export const useGlobalContext = () => {
